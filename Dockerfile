@@ -21,21 +21,16 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-inst
   # clean apt-get cache
   && apt-get clean && rm -rf /var/lib/apt/lists/*
  
-# pyenv, https://github.com/pyenv/pyenv
-RUN curl https://pyenv.run | bash
-ENV PYENV_ROOT /root/.pyenv
-ENV PATH $PYENV_ROOT/bin:$PATH
-ENV PATH $PYENV_ROOT/shims:$PATH
-
-RUN echo "" >> ~/.bashrc && \
-    echo "# pyenv" >> ~/.bashrc && \
-    echo "eval \"\$(pyenv init -)\"" >> ~/.bashrc && \
-    echo "" >> ~/.bashrc
-
 ###########
 # CV Perc #
 ###########
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y \
+    # utils
+    cmake \
+    sudo \
+    iputils-ping \
+    # required by git 
+    openssh-client \
     vim \
     # required for opengl
     # opengl required installations mesa-common-dev
@@ -45,9 +40,20 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-inst
     libpcl-dev \
     && apt-get clean all && rm -rf /var/lib/apt/lists/*
 
+# pyenv, https://github.com/pyenv/pyenv
+RUN git clone https://github.com/pyenv/pyenv /usr/share/pyenv --depth 1
+ENV PYENV_ROOT /usr/share/pyenv
+ENV PATH $PYENV_ROOT/bin:$PATH
+ENV PATH $PYENV_ROOT/shims:$PATH
+
+RUN echo "" >> ~/.bashrc && \
+    echo "# pyenv" >> ~/.bashrc && \
+    echo "eval \"\$(pyenv init -)\"" >> ~/.bashrc && \
+    echo "" >> ~/.bashrc
+
 # install required python versions
 RUN pyenv install 3.6.15
-RUN pyenv install 3.10.9
+# RUN pyenv install 3.10.9
 
 # Set docker labels
 # version format: "{major}.{minor}.{patch}"
