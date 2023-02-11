@@ -27,11 +27,12 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-inst
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y \
     # utils
     cmake \
+    cron \
     sudo \
     iputils-ping \
+    vim \
     # required by git 
     openssh-client \
-    vim \
     # required for opengl
     # opengl required installations mesa-common-dev
     # libxi-dev required for freeglut3-dev https://stackoverflow.com/questions/5299989/x11-xlib-h-not-found-in-ubuntu
