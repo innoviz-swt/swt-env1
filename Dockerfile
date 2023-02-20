@@ -47,10 +47,15 @@ ENV PYENV_ROOT /usr/share/pyenv
 ENV PATH $PYENV_ROOT/bin:$PATH
 ENV PATH $PYENV_ROOT/shims:$PATH
 
+RUN mkdir -p $PYENV_ROOT/shims $PYENV_ROOT/versions && \
+    touch $PYENV_ROOT/version && \
+    chmod 777 $PYENV_ROOT/shims $PYENV_ROOT/versions $PYENV_ROOT/version
+
 RUN echo "" >> ~/.bashrc && \
     echo "# pyenv" >> ~/.bashrc && \
     echo "eval \"\$(pyenv init -)\"" >> ~/.bashrc && \
     echo "" >> ~/.bashrc
+
 
 # install required python versions
 RUN pyenv install 3.6.15

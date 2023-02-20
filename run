@@ -1,7 +1,7 @@
 #!/bin/bash
 cd $(dirname $0)
 
-base="${1:-bionic}" 
+base="${1:-focal}" 
 ver="${2:-latest}" 
 docker run -it --rm  --privileged --gpus 1 swt-env1-$base:$ver 
 # docker run --rm --privileged --gpus 1 nvidia/cuda:11.0.3-base-ubuntu18.04 nvidia-smi
