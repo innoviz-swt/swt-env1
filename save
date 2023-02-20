@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+set -x
+
+cd $(dirname $0)
+mkdir -p tmp
+
+
+base="${1:-focal}" 
+ver="${2:-latest}" 
+docker save swt-env1-$base:$ver | gzip > /tmp/swt-env1-$base_$ver.tar.gz
+mv /tmp/swt-env1-$base_$ver.tar.gz /mnt/weka01/cvalgo/docker_images/
