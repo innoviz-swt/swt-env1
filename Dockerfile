@@ -59,7 +59,7 @@ RUN echo "" >> ~/.bashrc && \
 
 # install required python versions
 RUN pyenv install 3.6.15
-# RUN pyenv install 3.10.9
+RUN pyenv install 3.10.9
 
 # Set docker labels
 # version format: "{major}.{minor}.{patch}"

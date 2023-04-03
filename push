@@ -1,6 +1,6 @@
 #!/bin/bash
 cd $(dirname $0)
+source ./common.sh
 
-base="${1:-focal}" 
-ver="${2:-latest}" 
-docker push markkinnoviz/swt-env1-$base:$ver 
+docker tag $docker_tag inv-lgs04:5000/$docker_tag
+docker push inv-lgs04:5000/$docker_tag
