@@ -1,15 +1,12 @@
 #!/bin/bash
+set -e
+
 cd $(dirname $0)
 source ./common.sh
 
 ver="${1:-latest}" 
 build=$(git rev-parse --short HEAD)
 
-# base map
-declare -A base_arr
-base_arr[bionic]=nvidia/cuda:11.7.1-base-ubuntu18.04
-base_arr[focal]=nvidia/cuda:11.7.1-base-ubuntu20.04
-
 base=${base_arr[$base]}
 echo build $docker_tag, base: $base  
-DOCKER_BUILDKIT=1 docker build . -t $docker_tag --build-arg BASE=$base --build-arg VER=$ver --build-arg BUILD=$build 
+DOCKER_BUILDKIT=1 docker build . -t $docker_tag --build-arg VER=$ver --build-arg BUILD=$build 

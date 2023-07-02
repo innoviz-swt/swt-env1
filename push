@@ -2,5 +2,5 @@
 cd $(dirname $0)
 source ./common.sh
 
-docker tag $docker_tag inv-lgs04:5000/$docker_tag
-docker push inv-lgs04:5000/$docker_tag
+docker tag $docker_tag cvops.il.innoviz.tech:5000/$docker_tag
+docker push cvops.il.innoviz.tech:5000/$docker_tag
