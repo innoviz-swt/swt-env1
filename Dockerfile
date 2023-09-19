@@ -1,5 +1,5 @@
 # Start from base image of ubuntu - see https://hub.docker.com/_/ubuntu 
-FROM nvidia/cuda:11.7.1-base-ubuntu20.04
+FROM nvidia/cuda:12.1.1-base-ubuntu20.04
 
 #########
 # Pyenv #
@@ -35,6 +35,13 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-inst
     libgl-dev freeglut3-dev libxi-dev \
     # using PCL cpp library
     libpcl-dev \
+    && apt-get clean all && rm -rf /var/lib/apt/lists/*
+
+#############
+# Inno Perc #
+#############
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y \
+    git-lfs=2.9.2-1 \
     && apt-get clean all && rm -rf /var/lib/apt/lists/*
 
 # pyenv, https://github.com/pyenv/pyenv
